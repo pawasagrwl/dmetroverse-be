@@ -42,5 +42,5 @@ async def get_route_legacy(
     """Legacy compatibility route for old frontend."""
     dt = datetime.now().isoformat()
     return await proxy(
-        f"{lang.value}/station_route/{from_code}/{to_code}/{route_type.value}/{dt}"
+        f"{lang.value}/station_route/{from_code}/{to_code}/{route_type}/{dt}"
     )
