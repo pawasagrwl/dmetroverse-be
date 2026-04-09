@@ -17,13 +17,10 @@ app = FastAPI(
 )
 
 # --- Middleware ---
-# 1. Custom Access Control (Blocks non-allowed Origins)
-app.add_middleware(AccessControlMiddleware)
-
-# 2. CORS (Allows browser to access if Origin is allowed)
+# Permissive CORS - Accessible from anywhere
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Fine because AccessControlMiddleware restricts origins first
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -47,12 +44,8 @@ async def shutdown_event():
 # --- Root & Help Routes ---
 @app.get("/", tags=["Root"])
 async def root():
-    return {
-        "service": "DMetroverse API",
-        "description": "Proxy for DMRC routing and information.",
-        "docs": "/docs",
-        "frontend": FRONTEND_URL
-    }
+    """Redirects the base API URL directly to the Frontend."""
+    return RedirectResponse(url=FRONTEND_URL)
 
 @app.get("/help", tags=["Root"])
 async def help_page():
