@@ -20,5 +20,5 @@ async def get_station_legacy(
     code: str = Path(..., description="Station code"),
 ):
     """Legacy compatibility proxy for direct DMRC station calls."""
-    return await proxy(f"en/{code}")
+    return await proxy(f"en/station/{code}")
 

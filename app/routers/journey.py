@@ -36,7 +36,7 @@ async def get_route(
 async def get_route_legacy(
     from_code: str = Path(...),
     to_code: str = Path(...),
-    route_type: RouteType = Path(...),
+    route_type: str = Path(...),
     lang: Lang = Query(Lang.en),
 ):
     """Legacy compatibility route for old frontend."""
