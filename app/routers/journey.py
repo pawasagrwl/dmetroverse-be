@@ -30,3 +30,17 @@ async def get_route(
     return await proxy(
         f"{lang.value}/station_route/{from_code}/{to_code}/{route_type.value}/{dt}"
     )
+
+
+@router.get("/{from_code}/{to_code}/{route_type}", include_in_schema=False)
+async def get_route_legacy(
+    from_code: str = Path(...),
+    to_code: str = Path(...),
+    route_type: RouteType = Path(...),
+    lang: Lang = Query(Lang.en),
+):
+    """Legacy compatibility route for old frontend."""
+    dt = datetime.now().isoformat()
+    return await proxy(
+        f"{lang.value}/station_route/{from_code}/{to_code}/{route_type.value}/{dt}"
+    )

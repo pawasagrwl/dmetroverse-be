@@ -13,3 +13,12 @@ async def get_station(
 ):
     """Get full station details: facilities, gates, lifts, parking, timing, feeder bus."""
     return await proxy(f"{lang.value}/{slug}")
+
+
+@router.get("/v2/en/station/{code}", include_in_schema=False)
+async def get_station_legacy(
+    code: str = Path(..., description="Station code"),
+):
+    """Legacy compatibility proxy for direct DMRC station calls."""
+    return await proxy(f"en/{code}")
+
